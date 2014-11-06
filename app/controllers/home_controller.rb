@@ -2,7 +2,6 @@ class HomeController < ApplicationController
   def index
     if logged_in?
       gh_auth = current_user.authorizations.find_by(provider: :github)
-      raise "help"
       if gh_auth
         response = RestClient.get("https://api.github.com/user/repos",
                                   { authorization: "token #{gh_auth.token}" })
